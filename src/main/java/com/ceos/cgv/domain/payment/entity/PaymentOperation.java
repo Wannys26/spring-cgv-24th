@@ -137,20 +137,28 @@ public class PaymentOperation extends BaseTimeEntity {
     }
 
     public void succeed(String result) {
+        requireUnfinished();
         status = PaymentOperationStatus.SUCCEEDED;
         resultJson = result;
         failureCode = null;
     }
 
     public void fail(String code, String result) {
+        requireUnfinished();
         status = PaymentOperationStatus.FAILED;
         failureCode = code;
         resultJson = result;
     }
 
     public void startCompensation(String code) {
+        requireUnfinished();
         if (compensationKey == null) compensationKey = UUID.randomUUID().toString();
         status = PaymentOperationStatus.COMPENSATING;
         failureCode = code;
+    }
+
+    // 완료 응답은 재전송 시 그대로 반환되므로, 종결된 작업의 결과와 상태를 덮어쓰지 않는다.
+    private void requireUnfinished() {
+        if (isTerminal()) throw new IllegalStateException("Finished payment operation cannot change");
     }
 }
