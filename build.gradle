@@ -62,6 +62,7 @@ tasks.register('mysqlTest', Test) {
 		includeTestsMatching 'com.ceos.cgv.domain.payment.service.PaymentWorkflowIntegrationTest'
 		includeTestsMatching 'com.ceos.cgv.domain.payment.service.PaymentConcurrencyIntegrationTest'
 		includeTestsMatching 'com.ceos.cgv.domain.payment.service.PaymentConcurrencyComparisonTest'
+		includeTestsMatching 'com.ceos.cgv.domain.payment.service.PaymentRecoveryIntegrationTest'
 		includeTestsMatching 'com.ceos.cgv.domain.payment.schema.PaymentSchemaUpgradeIntegrationTest'
 	}
 	// Every invocation verifies a fresh database rather than reuse an earlier result.

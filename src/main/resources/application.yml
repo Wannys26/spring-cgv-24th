@@ -23,6 +23,11 @@ cgv:
   payment:
     recovery:
       approval-not-found-grace: PT30M
+      scheduler:
+        enabled: true
+        delay-ms: 60000
+        stale-after: PT1M
+        batch-size: 50
     toss:
       client-key: ${TOSS_CLIENT_KEY:}
       secret-key: ${TOSS_SECRET_KEY:}
